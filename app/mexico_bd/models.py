@@ -1,25 +1,21 @@
 from __future__ import unicode_literals
-
 from django.db import models
-
-# Create your models here.
-
-
 
 
 class Estado(models.Model):
 	nombre = models.CharField(max_length=45)
+	
 	class Meta:
 		ordering  = ('nombre',)
 		app_label = 'mexico_bd'
 	def __unicode__(self):
 		return self.nombre
 
-
 class Municipio(models.Model):
-	clave  = models.CharField(max_length=6)
+	clave  = models.CharField(max_length=6, primary_key = True)
 	estado = models.ForeignKey(Estado)
 	nombre = models.CharField(max_length=100)
+
 	class Meta:
 		ordering        = ('nombre',)
 		app_label       = 'mexico_bd'
@@ -27,9 +23,10 @@ class Municipio(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
-
 class TipoAsentadera(models.Model):
 	nombre = models.CharField(max_length=110)
+	clave = models.IntegerField()
+
 	class Meta:
 		ordering  = ('nombre',)
 		app_label = 'mexico_bd'
@@ -38,6 +35,7 @@ class TipoAsentadera(models.Model):
 
 class Zona(models.Model):
 	nombre = models.CharField(max_length=110)
+
 	class Meta:
 		ordering  = ('nombre',)
 		app_label = 'mexico_bd'
